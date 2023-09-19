@@ -1,10 +1,11 @@
 ﻿using ChatSessionManagement.Models;
+using System.Collections.Concurrent;
 
 namespace ChatSessionManagement.Core.Repositories
 {
     public interface ITeamRepository : IRepositoryBase
     {
-        Dictionary<string, Team>? Teams { get; }
+        ConcurrentDictionary<string, Team>? Teams { get; }
 
         string GetAvailableNormalTeamName();
 

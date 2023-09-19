@@ -2,41 +2,46 @@
 using ChatSessionManagement.Infrastructure.Factories;
 using ChatSessionManagement.Infrastructure.Enumerations;
 using ChatSessionManagement.Models;
+using System.Collections.Concurrent;
+using ChatSessionManagement.Infrastructure.Configurations;
 
 namespace ChatSessionManagement.Repositories.InMemoryRepositories
 {
     public class TeamRepository : ITeamRepository
     {
-        private static Dictionary<string, Team>? _teams = null;
+        private static ConcurrentDictionary<string, Team>? _teams = null;
         private IAgentRepository _agentRepository;
 
-        public Dictionary<string, Team>? Teams
+        public ConcurrentDictionary<string, Team>? Teams
         {
             get
             {
                 if (_teams == null)
                 {
                     Team _team;
-                    _teams = new Dictionary<string, Team>();
+                    _teams = new ConcurrentDictionary<string, Team>();
 
                     _team = TeamFactory.CreateTeamA();
                     _team.MemberList.Add(_agentRepository.GetNextAgentBySeniorityType(SeniorityTypeEnum.Lead));
                     _team.MemberList.Add(_agentRepository.GetNextAgentBySeniorityType(SeniorityTypeEnum.Midlevel));
                     _team.MemberList.Add(_agentRepository.GetNextAgentBySeniorityType(SeniorityTypeEnum.Midlevel));
                     _team.MemberList.Add(_agentRepository.GetNextAgentBySeniorityType(SeniorityTypeEnum.Junior));
-                    _teams.Add(TeamFactory.TeamName.TeamA, _team);
+                    _team.ChatSessions = new BlockingCollection<ChatSession>(Convert.ToInt32( _team.Capacity * ApplicationConfig.QueueMutiplier));
+                    _teams.TryAdd(TeamFactory.TeamName.TeamA, _team);
 
                     _team = TeamFactory.CreateTeamB();
                     _team.MemberList.Add(_agentRepository.GetNextAgentBySeniorityType(SeniorityTypeEnum.Senior));
                     _team.MemberList.Add(_agentRepository.GetNextAgentBySeniorityType(SeniorityTypeEnum.Midlevel));
                     _team.MemberList.Add(_agentRepository.GetNextAgentBySeniorityType(SeniorityTypeEnum.Junior));
-                    _team.MemberList.Add(_agentRepository.GetNextAgentBySeniorityType(SeniorityTypeEnum.Junior));                    
-                    _teams.Add(TeamFactory.TeamName.TeamB, _team);
+                    _team.MemberList.Add(_agentRepository.GetNextAgentBySeniorityType(SeniorityTypeEnum.Junior));
+                    _team.ChatSessions = new BlockingCollection<ChatSession>(Convert.ToInt32(_team.Capacity * ApplicationConfig.QueueMutiplier));
+                    _teams.TryAdd(TeamFactory.TeamName.TeamB, _team);
 
                     _team = TeamFactory.CreateTeamC();                    
                     _team.MemberList.Add(_agentRepository.GetNextAgentBySeniorityType(SeniorityTypeEnum.Midlevel));
                     _team.MemberList.Add(_agentRepository.GetNextAgentBySeniorityType(SeniorityTypeEnum.Midlevel));
-                    _teams.Add(TeamFactory.TeamName.TeamC, _team);
+                    _team.ChatSessions = new BlockingCollection<ChatSession>(Convert.ToInt32(_team.Capacity * ApplicationConfig.QueueMutiplier));
+                    _teams.TryAdd(TeamFactory.TeamName.TeamC, _team);
 
                     _team = TeamFactory.CreateTeamO();
                     _team.MemberList.Add(_agentRepository.GetNextAgentBySeniorityType(SeniorityTypeEnum.Junior));
@@ -45,7 +50,8 @@ namespace ChatSessionManagement.Repositories.InMemoryRepositories
                     _team.MemberList.Add(_agentRepository.GetNextAgentBySeniorityType(SeniorityTypeEnum.Junior));
                     _team.MemberList.Add(_agentRepository.GetNextAgentBySeniorityType(SeniorityTypeEnum.Junior));
                     _team.MemberList.Add(_agentRepository.GetNextAgentBySeniorityType(SeniorityTypeEnum.Junior));
-                    _teams.Add(TeamFactory.TeamName.TeamOverflow, _team);
+                    _team.ChatSessions = new BlockingCollection<ChatSession>(Convert.ToInt32(_team.Capacity * ApplicationConfig.QueueMutiplier));
+                    _teams.TryAdd(TeamFactory.TeamName.TeamOverflow, _team);                    
 
                 }
                 return _teams;
