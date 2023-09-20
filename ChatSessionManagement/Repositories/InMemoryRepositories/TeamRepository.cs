@@ -27,6 +27,7 @@ namespace ChatSessionManagement.Repositories.InMemoryRepositories
                     _team.MemberList.Add(_agentRepository.GetNextAgentBySeniorityType(SeniorityTypeEnum.Midlevel));
                     _team.MemberList.Add(_agentRepository.GetNextAgentBySeniorityType(SeniorityTypeEnum.Junior));
                     _team.ChatSessions = new BlockingCollection<ChatSession>(Convert.ToInt32( _team.Capacity * ApplicationConfig.QueueMutiplier));
+                    _team.BuildRoundRobinListOfAgents();
                     _teams.TryAdd(TeamFactory.TeamName.TeamA, _team);
 
                     _team = TeamFactory.CreateTeamB();
@@ -35,12 +36,14 @@ namespace ChatSessionManagement.Repositories.InMemoryRepositories
                     _team.MemberList.Add(_agentRepository.GetNextAgentBySeniorityType(SeniorityTypeEnum.Junior));
                     _team.MemberList.Add(_agentRepository.GetNextAgentBySeniorityType(SeniorityTypeEnum.Junior));
                     _team.ChatSessions = new BlockingCollection<ChatSession>(Convert.ToInt32(_team.Capacity * ApplicationConfig.QueueMutiplier));
+                    _team.BuildRoundRobinListOfAgents();
                     _teams.TryAdd(TeamFactory.TeamName.TeamB, _team);
 
                     _team = TeamFactory.CreateTeamC();                    
                     _team.MemberList.Add(_agentRepository.GetNextAgentBySeniorityType(SeniorityTypeEnum.Midlevel));
                     _team.MemberList.Add(_agentRepository.GetNextAgentBySeniorityType(SeniorityTypeEnum.Midlevel));
                     _team.ChatSessions = new BlockingCollection<ChatSession>(Convert.ToInt32(_team.Capacity * ApplicationConfig.QueueMutiplier));
+                    _team.BuildRoundRobinListOfAgents();
                     _teams.TryAdd(TeamFactory.TeamName.TeamC, _team);
 
                     _team = TeamFactory.CreateTeamO();
@@ -51,6 +54,7 @@ namespace ChatSessionManagement.Repositories.InMemoryRepositories
                     _team.MemberList.Add(_agentRepository.GetNextAgentBySeniorityType(SeniorityTypeEnum.Junior));
                     _team.MemberList.Add(_agentRepository.GetNextAgentBySeniorityType(SeniorityTypeEnum.Junior));
                     _team.ChatSessions = new BlockingCollection<ChatSession>(Convert.ToInt32(_team.Capacity * ApplicationConfig.QueueMutiplier));
+                    _team.BuildRoundRobinListOfAgents();
                     _teams.TryAdd(TeamFactory.TeamName.TeamOverflow, _team);                    
 
                 }
@@ -81,6 +85,11 @@ namespace ChatSessionManagement.Repositories.InMemoryRepositories
                 return TeamFactory.TeamName.TeamOverflow;
             else
                 return String.Empty;
+        }
+
+        public string GetOverflowTeamName()
+        {
+            return TeamFactory.TeamName.TeamOverflow;
         }
     }
 }

@@ -7,6 +7,12 @@ namespace ChatSessionManagement.Models
         public string? Token { get; set; } = Guid.NewGuid().ToString();
 
         public ChatSessionStatusEnum Status { get; set; } = ChatSessionStatusEnum.None;
-        
+
+        public DateTime CreatedDateTime { get; } = DateTime.Now;
+
+        public DateTime LastPollDateTime { get; set; } = DateTime.Now;
+
+        public bool IsActive { get; set; } = true;
+
     }
 }

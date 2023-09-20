@@ -10,5 +10,7 @@ namespace ChatSessionManagement.Core.Repositories
         string GetAvailableNormalTeamName();
 
         string GetAvailableOverflowTeamName();
+
+        string GetOverflowTeamName();
     }
 }

@@ -6,6 +6,10 @@ namespace ChatSessionManagement.Core.Services
     {
         Task<ChatSession> CreateChatSession();
 
-        Task<ChatSession> CheckChatSession(string token);
+        Task<ChatSession> CheckChatSessionStatus(string token);
+
+        Task InactivateExpiredChatSessions(CancellationToken stoppingToken);
+
+        Task AssignChatSessionToAgent(CancellationToken stoppingToken);
     }
 }

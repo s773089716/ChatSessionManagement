@@ -52,13 +52,19 @@ namespace ChatSessionManagement.Controllers
         }
 
         [HttpPost]
-        [Route("CheckChatSession")]
+        [Route("CheckChatSessionStatus")]
         public async Task<ActionResult<CreateChatSessionResponse>> CheckChatSessionStatus(CheckChatSessionStatusRequest request)
         {
             CheckChatSessionStatusResponse response = new CheckChatSessionStatusResponse();
             try
             {
-                ChatSession chatSession = await _chatSessionService.CheckChatSession(request.Token);
+                if (request == null)
+                    throw new Exception("Invalid request");
+
+                if (String.IsNullOrEmpty(request.Token))
+                    throw new Exception("Invalid token");
+
+                ChatSession chatSession = await _chatSessionService.CheckChatSessionStatus(request.Token);
 
                 if (chatSession != null)
                 {

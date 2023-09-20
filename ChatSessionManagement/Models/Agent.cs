@@ -1,5 +1,6 @@
 ﻿using ChatSessionManagement.Infrastructure.Configurations;
 using ChatSessionManagement.Infrastructure.Enumerations;
+using System.Collections.Concurrent;
 
 namespace ChatSessionManagement.Models
 {
@@ -9,7 +10,8 @@ namespace ChatSessionManagement.Models
         public string? Name { get; set; }
         public SeniorityTypeEnum SeniorityType { get; set; } = SeniorityTypeEnum.Junior;        
         public float SeniorityMultiplier { get; set; }
-        public byte Capacity { get; set; } = ApplicationConfig.ConcurrentChatsPerAgent;
+        public byte Capacity { get; set; } = 0;
+        public BlockingCollection<ChatSession> AssignedChatSessions = new BlockingCollection<ChatSession>();
 
         public Agent()
         {
