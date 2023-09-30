@@ -8,6 +8,8 @@ namespace ChatSessionManagement.Models
 
         public ChatSessionStatusEnum Status { get; set; } = ChatSessionStatusEnum.None;
 
+        public Agent? AssignedAgent { get; set; }
+
         public DateTime CreatedDateTime { get; } = DateTime.Now;
 
         public DateTime LastPollDateTime { get; set; } = DateTime.Now;

@@ -11,5 +11,7 @@ namespace ChatSessionManagement.Core.Services
         Task InactivateExpiredChatSessions(CancellationToken stoppingToken);
 
         Task AssignChatSessionToAgent(CancellationToken stoppingToken);
+
+        Task<ChatSession?> CloseChatSession(string token);
     }
 }

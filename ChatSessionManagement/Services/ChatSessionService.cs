@@ -160,6 +160,8 @@ namespace ChatSessionManagement.Services
                                         if (agent != null && agent.AssignedChatSessions.Count < agent.Capacity)
                                         {
                                             isAssigned = agent.AssignedChatSessions.TryAdd(chatSession);
+                                            if (isAssigned)
+                                                chatSession.AssignedAgent = agent;
                                         }
 
                                         agentIndex--;
@@ -208,6 +210,8 @@ namespace ChatSessionManagement.Services
                                             if (agent != null && agent.AssignedChatSessions.Count < agent.Capacity)
                                             {
                                                 isAssigned = agent.AssignedChatSessions.TryAdd(chatSession);
+                                                if (isAssigned)
+                                                    chatSession.AssignedAgent = agent;
                                             }
 
                                             agentIndex--;
@@ -260,11 +264,14 @@ namespace ChatSessionManagement.Services
                 if (chatSession != null)
                 {
                     bool IsSuccess = _chatSessionGlobalDictionary.TryRemove(token, out chatSession);
-
                     if (IsSuccess)
+                    {
+                        if (chatSession != null && chatSession.AssignedAgent != null)
+                            chatSession.AssignedAgent.AssignedChatSessions.TryTake(out chatSession);
                         return chatSession;
+                    }                    
                 }                
-            }
+            }            
 
             return null;
         }

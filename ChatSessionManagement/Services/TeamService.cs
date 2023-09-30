@@ -4,5 +4,6 @@ namespace ChatSessionManagement.Services
 {
     public class TeamService : ITeamService
     {
+        
     }
 }

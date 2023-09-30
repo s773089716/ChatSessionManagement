@@ -80,6 +80,36 @@ namespace ChatSessionManagement.Controllers
 
             return new BadRequestObjectResult(response);
         }
+
+        [HttpPost]
+        [Route("CheckChatSessionStatus")]
+        public async Task<ActionResult<CreateChatSessionResponse>> CloseChatSession(CloseChatSessionRequest request)
+        {
+            CloseChatSessionResponse response = new CloseChatSessionResponse();
+            try
+            {
+                if (request == null)
+                    throw new Exception("Invalid request");
+
+                if (String.IsNullOrEmpty(request.Token))
+                    throw new Exception("Invalid token");
+
+                ChatSession? chatSession = await _chatSessionService.CloseChatSession(request.Token);
+
+                if (chatSession != null)
+                {
+                    response.ChatSession = chatSession;
+                    return Ok(response);
+                }
+            }
+            catch (Exception ex)
+            {
+                response.Message = ex.Message;
+                response.MessageType = DTOMessageType.Error;
+            }
+
+            return new BadRequestObjectResult(response);
+        }
         #endregion
     }
 }
