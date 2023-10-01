@@ -235,7 +235,7 @@ namespace ChatSessionManagement.Services
                     if ( DateTime.Now.Subtract(chatSession.LastPollDateTime).TotalSeconds > ApplicationConfig.ExpirationDurationInSeconds)
                         chatSession.IsActive = false;
                 }
-                await Task.Delay(1000);
+                //await Task.Delay(1000);
             }
         }
 
