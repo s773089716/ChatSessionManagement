@@ -1,19 +1,11 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using ChatSessionManagement.BusinessLogic.DTOs;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace ChatClient_User
 {
-    //    internal class Program
-    //    {
-    //        static void Main(string[] args)
-    //        {
-    //            Console.WriteLine("Hello, World!");
-    //        }
-    //    }
-    //}
-
-    class Program
+   class Program
     {
         static async Task<int> Main(string[] args)
         {
@@ -33,13 +25,14 @@ namespace ChatClient_User
                 try
                 {
                     var myService = services.GetRequiredService<ChatManager>();
-                    var result = await myService.Run();
+                    CreateChatSessionResponse? createChatSessionResponse = await myService.SendCreateChatSessionRequest();
 
-                    Console.WriteLine(result);
+                    if (createChatSessionResponse != null && createChatSessionResponse.ChatSession != null && !String.IsNullOrEmpty(createChatSessionResponse.ChatSession.Token))
+                        Console.WriteLine($"Token returned: {createChatSessionResponse.ChatSession.Token}");
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Error Occured");
+                    Console.WriteLine($"Error Occured {ex.Message}");
                 }
             }
 

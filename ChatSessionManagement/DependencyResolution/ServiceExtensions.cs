@@ -1,9 +1,9 @@
-﻿using ChatSessionManagement.Core.Repositories;
-using ChatSessionManagement.Core.Services;
-using ChatSessionManagement.Repositories.InMemoryRepositories;
-using ChatSessionManagement.Services;
+﻿using ChatSessionManagement.BusinessLogic.Core.Repositories;
+using ChatSessionManagement.BusinessLogic.Core.Services;
+using ChatSessionManagement.BusinessLogic.Repositories.InMemoryRepositories;
+using ChatSessionManagement.BusinessLogic.Services;
 
-namespace ChatSessionManagement.DependencyResolution
+namespace ChatSessionManagement.BusinessLogic.DependencyResolution
 {
     public static class ServiceExtensions
     {

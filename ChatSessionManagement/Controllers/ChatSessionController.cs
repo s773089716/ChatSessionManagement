@@ -1,12 +1,12 @@
-﻿using ChatSessionManagement.Core.Services;
-using ChatSessionManagement.DTOs;
-using ChatSessionManagement.Infrastructure.Enumerations;
-using ChatSessionManagement.Models;
+﻿using ChatSessionManagement.BusinessLogic.Core.Services;
+using ChatSessionManagement.BusinessLogic.DTOs;
+using ChatSessionManagement.BusinessLogic.Infrastructure.Enumerations;
+using ChatSessionManagement.BusinessLogic.Models;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace ChatSessionManagement.Controllers
+namespace ChatSessionManagement.BusinessLogic.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

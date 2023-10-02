@@ -1,4 +1,4 @@
-namespace ChatSessionManagement
+namespace ChatSessionManagement.BusinessLogic
 {
     public class WeatherForecast
     {

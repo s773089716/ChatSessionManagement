@@ -1,6 +1,6 @@
-﻿using ChatSessionManagement.Core.BackgroundServiceScopes;
+﻿using ChatSessionManagement.BusinessLogic.Core.BackgroundServiceScopes;
 
-namespace ChatSessionManagement.BackgroundServices
+namespace ChatSessionManagement.BusinessLogic.BackgroundServices
 {
     public class ChatSessionExpirationBackgroundService : BackgroundService
     {

@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore;
 
-namespace ChatSessionManagement
+namespace ChatSessionManagement.BusinessLogic
 {
     public class Program
     {

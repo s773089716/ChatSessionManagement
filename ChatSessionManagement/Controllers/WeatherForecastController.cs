@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace ChatSessionManagement.Controllers
+namespace ChatSessionManagement.BusinessLogic.Controllers
 {
     [ApiController]
     [Route("[controller]")]

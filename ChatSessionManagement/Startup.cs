@@ -1,10 +1,10 @@
-﻿using ChatSessionManagement.DependencyResolution;
+﻿using ChatSessionManagement.BusinessLogic.DependencyResolution;
 using Serilog;
 using Serilog.Extensions.Logging;
 using System.Configuration;
 using ILogger = Serilog.ILogger;
 
-namespace ChatSessionManagement
+namespace ChatSessionManagement.BusinessLogic
 {
     public class Startup
     {

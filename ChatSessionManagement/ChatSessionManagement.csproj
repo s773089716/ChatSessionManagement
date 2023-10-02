@@ -7,8 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Core\BackgroundServices\" />
-    <Folder Include="Core\Scopes\" />
     <Folder Include="Scopes\" />
     <Folder Include="PostmanCollection\" />
     <Folder Include="OtherResources\" />
@@ -16,11 +14,14 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.16" />
-    <PackageReference Include="RoundRobin" Version="2.2.1" />
     <PackageReference Include="Serilog" Version="3.0.1" />
     <PackageReference Include="Serilog.Extensions.Logging" Version="7.0.0" />
     <PackageReference Include="Serilog.Extensions.Logging.File" Version="3.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ChatSessionManagement.BusinessLogic\ChatSessionManagement.BusinessLogic.csproj" />
   </ItemGroup>
 
 </Project>
