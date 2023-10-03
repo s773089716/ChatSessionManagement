@@ -28,7 +28,21 @@ namespace ChatClient_User
                     CreateChatSessionResponse? createChatSessionResponse = await myService.SendCreateChatSessionRequest();
 
                     if (createChatSessionResponse != null && createChatSessionResponse.ChatSession != null && !String.IsNullOrEmpty(createChatSessionResponse.ChatSession.Token))
+                    {
                         Console.WriteLine($"Token returned: {createChatSessionResponse.ChatSession.Token}");
+
+                        for (int index = 0; index < 10; index++)
+                        {
+                            CheckChatSessionStatusResponse? checkChatSessionStatusResponse = await myService.CheckChatSessionStatusRequest(createChatSessionResponse.ChatSession.Token);
+
+                            if (checkChatSessionStatusResponse != null && checkChatSessionStatusResponse.ChatSession != null && !String.IsNullOrEmpty(checkChatSessionStatusResponse.ChatSession.Token))
+                            {
+                                Console.WriteLine($"New status: {createChatSessionResponse.ChatSession.Status}");
+                                await Task.Delay(1000);
+                            }
+                        }
+                    }
+                        
                 }
                 catch (Exception ex)
                 {

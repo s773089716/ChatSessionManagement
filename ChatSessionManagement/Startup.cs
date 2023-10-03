@@ -1,4 +1,6 @@
-﻿using ChatSessionManagement.BusinessLogic.DependencyResolution;
+﻿using ChatSessionManagement.BusinessLogic.BackgroundServices;
+using ChatSessionManagement.BusinessLogic.BackgroundServiceScopes;
+using ChatSessionManagement.BusinessLogic.DependencyResolution;
 using Serilog;
 using Serilog.Extensions.Logging;
 using System.Configuration;
@@ -45,6 +47,8 @@ namespace ChatSessionManagement.BusinessLogic
             });
 
             //services.AddHostedService<DroneBatteryLevelCheckerService>();
+            services.AddHostedService<ChatSessionAssignmentBackgroundService>();
+            //services.AddHostedService<ChatSessionExpirationBackgroundService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

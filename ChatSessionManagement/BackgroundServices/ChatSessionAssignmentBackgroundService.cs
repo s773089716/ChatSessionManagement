@@ -15,7 +15,7 @@ namespace ChatSessionManagement.BusinessLogic.BackgroundServices
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            _logger.LogInformation($"{nameof(ChatSessionAssignmentBackgroundService)} is running.");
+            _logger.LogInformation($"{nameof(ChatSessionAssignmentBackgroundService)} is running1.");
 
             await DoWorkAsync(stoppingToken);
         }

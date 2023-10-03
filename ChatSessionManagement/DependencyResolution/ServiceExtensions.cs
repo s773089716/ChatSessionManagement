@@ -1,4 +1,6 @@
-﻿using ChatSessionManagement.BusinessLogic.Core.Repositories;
+﻿using ChatSessionManagement.BusinessLogic.BackgroundServiceScopes;
+using ChatSessionManagement.BusinessLogic.Core.BackgroundServiceScopes;
+using ChatSessionManagement.BusinessLogic.Core.Repositories;
 using ChatSessionManagement.BusinessLogic.Core.Services;
 using ChatSessionManagement.BusinessLogic.Repositories.InMemoryRepositories;
 using ChatSessionManagement.BusinessLogic.Services;
@@ -14,6 +16,8 @@ namespace ChatSessionManagement.BusinessLogic.DependencyResolution
             services.AddScoped<IChatSessionRepository, ChatSessionRepository>();
             services.AddScoped<IChatSessionService, ChatSessionService>();
             //services.AddScoped<IScopedProcessingService, DefaultScopedProcessingService>();
+            services.AddScoped<IChatSessionAssignmentBackgroundServiceScope, ChatSessionAssignmentBackgroundServiceScope>();
+            services.AddScoped<IChatSessionExpirationBackgroundServiceScope, ChatSessionExpirationBackgroundServiceScope>();
 
             return services;
         }

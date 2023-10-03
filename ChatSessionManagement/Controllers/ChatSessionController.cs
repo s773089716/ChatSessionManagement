@@ -82,7 +82,7 @@ namespace ChatSessionManagement.BusinessLogic.Controllers
         }
 
         [HttpPost]
-        [Route("CheckChatSessionStatus")]
+        [Route("CloseChatSession")]
         public async Task<ActionResult<CreateChatSessionResponse>> CloseChatSession(CloseChatSessionRequest request)
         {
             CloseChatSessionResponse response = new CloseChatSessionResponse();

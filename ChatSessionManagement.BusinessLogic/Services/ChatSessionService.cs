@@ -161,7 +161,10 @@ namespace ChatSessionManagement.BusinessLogic.Services
                                         {
                                             isAssigned = agent.AssignedChatSessions.TryAdd(chatSession);
                                             if (isAssigned)
+                                            {
                                                 chatSession.AssignedAgent = agent;
+                                                chatSession.Status = ChatSessionStatusEnum.Assigned;
+                                            }
                                         }
 
                                         agentIndex--;
@@ -211,7 +214,10 @@ namespace ChatSessionManagement.BusinessLogic.Services
                                             {
                                                 isAssigned = agent.AssignedChatSessions.TryAdd(chatSession);
                                                 if (isAssigned)
+                                                {
                                                     chatSession.AssignedAgent = agent;
+                                                    chatSession.Status = ChatSessionStatusEnum.Assigned;
+                                                }                                                    
                                             }
 
                                             agentIndex--;

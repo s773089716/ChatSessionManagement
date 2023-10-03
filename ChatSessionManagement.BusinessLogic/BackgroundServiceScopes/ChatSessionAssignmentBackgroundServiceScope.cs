@@ -20,13 +20,13 @@ namespace ChatSessionManagement.BusinessLogic.BackgroundServiceScopes
         {
             while (!stoppingToken.IsCancellationRequested)
             {
-                StringBuilder output = new StringBuilder("checking status");
+                StringBuilder output = new StringBuilder("assign session");
 
                 await _chatSessionService.AssignChatSessionToAgent(stoppingToken);
 
                 _logger.LogInformation($"{output.ToString()}\r\n");
 
-                await Task.Delay(1000, stoppingToken);
+                await Task.Delay(1000, stoppingToken);                
             }
         }
     }
